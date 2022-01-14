@@ -1,0 +1,6 @@
+{
+  "assets/app.css": "http://localhost:8080/assets/app.css",
+  "assets/app.js": "http://localhost:8080/assets/app.js",
+  "assets/fonts/bootstrap-icons.woff?": "http://localhost:8080/assets/fonts/bootstrap-icons.94eeade1.woff",
+  "assets/fonts/bootstrap-icons.woff2?": "http://localhost:8080/assets/fonts/bootstrap-icons.dfd0ea12.woff2"
+}

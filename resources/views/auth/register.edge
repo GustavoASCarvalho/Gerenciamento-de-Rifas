@@ -1,0 +1,77 @@
+@layout('layout/app')
+
+@section('content')
+  	<div class="d-flex justify-content-center mt-5">
+		<div class="shadow-lg rounded-3 bg-body p-3">
+			<main class="form-signin">
+				<form action="{{ route('auth.store') }}" method="post">
+					{{ csrfField() }}
+					<h2 class="h3 mb-3 fw-normal">Registre-se</h2>
+
+					@if(flashMessages.has('errors.name'))
+						<div class="form-floating mb-1">
+							<input type="text" class="form-control is-invalid" name="name" id="name" placeholder="Nome" autofocus value="{{flashMessages.get('name') || '' }}">
+							<label for="name">Nome</label>
+							<div id="title" class="invalid-feedback">
+								{{flashMessages.get('errors.name')}}
+							</div>
+						</div>
+					@else
+						<div class="form-floating mb-1">
+							<input type="text" class="form-control" name="name" id="name" placeholder="Nome" autofocus value="{{flashMessages.get('name') || '' }}">
+							<label for="name">Nome</label>
+						</div>
+						<div id="title" class="form-text">
+							Este campo é obrigatório e precisa ter entre 3 a 25 caracteres
+						</div>
+					@endif
+					
+					@if(flashMessages.has('errors.email'))
+						<div class="form-floating mb-1">
+							<input type="email" class="form-control is-invalid" name="email" id="email" placeholder="nome@exemplo.com" value="{{flashMessages.get('email') || ''}}">
+							<label for="email">Email</label>
+							<div id="title" class="invalid-feedback">
+								{{flashMessages.get('errors.email')}}
+							</div>
+						</div>
+					@else
+						<div class="form-floating mb-1">
+							<input type="email" class="form-control" name="email" id="email" placeholder="nome@exemplo.com" value="{{flashMessages.get('email') || ''}}">
+							<label for="email">Email</label>
+							<div id="title" class="form-text">
+								Campo obrigatório
+							</div>
+						</div>
+						
+					@endif
+
+					@if(flashMessages.has('errors.password'))	
+						<div class="form-floating mb-1">
+							<input type="password" class="form-control is-invalid" name="password" id="password" placeholder="Senha" value="{{flashMessages.get('password') || ''}}">
+							<label for="password">Senha</label>
+							<div id="title" class="invalid-feedback">
+								{{flashMessages.get('errors.password')}}
+							</div>
+						</div>
+					@else
+					<div class="form-floating mb-1">
+						<input type="password" class="form-control" name="password" id="password" placeholder="Senha" value="{{flashMessages.get('password') || ''}}">
+						<label for="password">Senha</label>
+					</div>
+						<div id="title" class="form-text">
+							Campo obrigatório
+						</div>
+					@endif					
+					
+					<div class="checkbox mb-3">
+						<label>
+						<input class="form-check-input" type="checkbox" name="admin" value="true"> Administrador
+						</label>
+					</div>
+					<button class="w-100 btn btn-lg btn-color-1" type="submit">Registrar</button>
+					<span>já tem uma conta ? <a href="{{ route('auth.login') }}">Fazer login</a></span>
+				</form>
+			</main>
+		</div>
+  	</div>
+@endsection

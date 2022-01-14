@@ -1,0 +1,82 @@
+@layout('layout/app')
+
+@section('content')
+    <form class="row g-3" action="{{ route('types.store') }}" method="post">
+        {{ csrfField() }}
+        <h3 class="text-center text-color-1 mt-5 fs-1">Cadastrar Tipos</h3>
+        <div class="col-md-6 col-12">
+            @if(flashMessages.has('errors.description'))
+                <label for="description" class="form-label text-color-1">Descrição</label>
+                <textarea class="form-control is-invalid" id="description" name="description" aria-describedby="description">{{flashMessages.get('description') || ''}}</textarea>
+                <div id="description" class="text-danger">
+                    {{ flashMessages.get('errors.description')}}
+                </div>
+            @else
+                <label for="description" class="form-label text-color-1">Descrição</label>
+                <textarea class="form-control" id="description" name="description" aria-describedby="description">{{flashMessages.get('description') || ''}}</textarea>
+                <div id="description" class="form-text text-color-2">
+                    Este campo é obrigatório
+                </div>
+            @endif
+        </div>
+        <div class="col-md-6 col-12">
+            <label for="initialNumber" class="form-label text-color-1">Numero Inicial</label>
+            @if(flashMessages.has('errors.initialNumber'))
+                <div class="input-group">
+                    <input type="number" step="1" class="form-control is-invalid" id="initialNumber" name="initialNumber" aria-describedby="initialNumber" value="{{flashMessages.get('initialNumber') || ''}}">
+                </div>
+                <div id="initialNumber" class="text-danger">
+                    {{ flashMessages.get('errors.initialNumber')}}
+                </div>
+            @else
+                <div class="input-group">
+                    <input type="number" step="1" class="form-control" id="initialNumber" name="initialNumber" aria-describedby="initialNumber" value="{{flashMessages.get('initialNumber') || ''}}">
+                </div>
+                <div id="initialNumber" class="form-text text-color-2">
+                    Este campo é obrigatório e precisa ser um número
+                </div>
+            @endif
+        </div>
+        <div class="col-md-6 col-12">
+            <label for="step" class="form-label text-color-1">Passo</label>
+            @if(flashMessages.has('errors.step'))
+                <div class="input-group">
+                    <input type="number" step="1" class="form-control is-invalid" id="step" name="step" aria-describedby="step" value="{{flashMessages.get('step') || ''}}">
+                </div>
+                <div id="step" class="text-danger">
+                    {{ flashMessages.get('errors.step')}}
+                </div>
+            @else
+                <div class="input-group">
+                    <input type="number" step="1" class="form-control" id="step" name="step" aria-describedby="step" value="{{flashMessages.get('step') || ''}}">
+                </div>
+                <div id="step" class="form-text text-color-2">
+                    Este campo é obrigatório e precisa ser um número maior que 0
+                </div>
+            @endif
+        </div>
+        <div class="col-md-6 col-12">
+            <label for="numberOfTickets" class="form-label text-color-1">Quantidade de bilhetes</label>
+            @if(flashMessages.has('errors.numberOfTickets'))
+                <div class="input-group">
+                    <input type="number" step="1" class="form-control is-invalid" id="numberOfTickets" name="numberOfTickets" aria-describedby="numberOfTickets" value="{{flashMessages.get('numberOfTickets') || ''}}">
+                </div>
+                <div id="numberOfTickets" class="text-danger">
+                    {{ flashMessages.get('errors.numberOfTickets')}}
+                </div>
+            @else
+                <div class="input-group">
+                    <input type="number" step="1" class="form-control" id="numberOfTickets" name="numberOfTickets" aria-describedby="numberOfTickets" value="{{flashMessages.get('numberOfTickets') || ''}}">
+                </div>
+                <div id="numberOfTickets" class="form-text text-color-2">
+                    Este campo é obrigatório e precisa ser um número maior que 0
+                </div>
+            @endif
+        </div>
+        <div class="col-12">
+            <div class="d-flex justify-content-end">
+                <button type="submit" class="btn btn-lg btn-color-1 mb-2">Cadastrar</button>
+            </div>
+        </div>
+    </form>
+@endsection

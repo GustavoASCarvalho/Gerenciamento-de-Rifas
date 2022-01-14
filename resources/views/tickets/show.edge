@@ -1,0 +1,138 @@
+@layout('layout/app')
+
+@section('content')
+
+    <nav class="my-4">
+        <ul class="pagination">
+            <li 
+            class="page-item
+            @if(pag == 1)
+            disabled
+            @endif
+            "><a class="page-link bg-color-1 text-color-2 border-color-1" href="?pag={{pag-1}}">Previous</a></li>
+
+            <li class="page-item"
+            @if(pag-2 <= 0)
+            hidden
+            @endif
+            ><a class="page-link bg-color-1 text-color-2 border-color-1" href="?pag={{pag-2}}">{{pag-2}}</a><li>
+
+            <li class="page-item
+            @if(pag == 1)
+            disabled
+            @endif
+            "><a class="page-link bg-color-1 text-color-2 border-color-1" href="?pag={{pag-1}}">{{pag-1}}</a><li>
+
+            <li class="page-item"><a class="page-link bg-color-5 text-color-2 border-color-5" href="?pag={{pag}}">{{pag}}</a><li>
+
+            <li class="page-item 
+            @if(pag == Math.ceil(tam))
+            disabled
+            @endif
+            "><a class="page-link bg-color-1 text-color-2 border-color-1" href="?pag={{pag+1}}">{{pag+1}}</a></li>
+
+            <li class="page-item"
+            @if(pag+2 >= Math.ceil(tam))
+            hidden
+            @endif
+            ><a class="page-link bg-color-1 text-color-2 border-color-1" href="?pag={{pag+2}}">{{pag+2}}</a><li>
+
+            <li 
+            class="
+            page-item
+            @if(pag == Math.ceil(tam))
+            disabled
+            @endif
+            "><a class="page-link bg-color-1 text-color-2 border-color-1" href="?pag={{pag+1}}">Next</a></li>
+        </ul>
+    </nav>
+
+    <div class="row my-4">
+
+    @each(ticket in tickets)
+        @if(!ticket.userId)
+        <div class="col-lg-3 col-md-4 col-6 my-2 p-3 d-flex align-self-stretch">
+            <div class="row border">
+                <div class="col-9">
+                    <p class="card-text text-color-2">Ainda não comprado</p>
+                    <div class="mt-auto mx-auto">
+                        <form method="POST" action="{{route('ticket.buy', {id: ticket.raffleId, ticketId: ticket.id})}}">
+                            {{ csrfField() }}
+                            <button type="submit" class="btn btn-color-1">Comprar</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <h5 id="number" class="card-title text-color-2 m-1">NUMÉRO {{ ticket.number }}</h5>
+                </div>
+            </div>
+        </div>
+        @else
+        <div class="col-lg-3 col-md-4 col-6 my-2 p-3 d-flex align-self-stretch">
+            <div class="row border">
+                <div class="col-9">
+                    @each(user in users)
+                        @if(user.id == ticket.userId)
+                        <p class="card-text text-color-2">Comprado por: {{ user.name }}</p>
+                        @endif
+                    @endeach
+                    
+                    <div class="mt-auto mx-auto">
+                        <button disabled class="btn btn-color-1">Ja comprado</button>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <h5 id="number" class="card-title text-color-2 m-1">NUMÉRO {{ ticket.number }}</h5>
+                </div>
+            </div>
+        </div>
+        @endif
+    @endeach
+
+    </div>
+    
+    <nav class="my-4">
+        <ul class="pagination">
+            <li 
+            class="page-item
+            @if(pag == 1)
+            disabled
+            @endif
+            "><a class="page-link bg-color-1 text-color-2 border-color-1" href="?pag={{pag-1}}">Previous</a></li>
+
+            <li class="page-item"
+            @if(pag-2 <= 0)
+            hidden
+            @endif
+            ><a class="page-link bg-color-1 text-color-2 border-color-1" href="?pag={{pag-2}}">{{pag-2}}</a><li>
+
+            <li class="page-item
+            @if(pag == 1)
+            disabled
+            @endif
+            "><a class="page-link bg-color-1 text-color-2 border-color-1" href="?pag={{pag-1}}">{{pag-1}}</a><li>
+
+            <li class="page-item"><a class="page-link bg-color-5 text-color-2 border-color-5" href="?pag={{pag}}">{{pag}}</a><li>
+
+            <li class="page-item 
+            @if(pag == Math.ceil(tam))
+            disabled
+            @endif
+            "><a class="page-link bg-color-1 text-color-2 border-color-1" href="?pag={{pag+1}}">{{pag+1}}</a></li>
+
+            <li class="page-item"
+            @if(pag+2 >= Math.ceil(tam))
+            hidden
+            @endif
+            ><a class="page-link bg-color-1 text-color-2 border-color-1" href="?pag={{pag+2}}">{{pag+2}}</a><li>
+
+            <li 
+            class="
+            page-item
+            @if(pag == Math.ceil(tam))
+            disabled
+            @endif
+            "><a class="page-link bg-color-1 text-color-2 border-color-1" href="?pag={{pag+1}}">Next</a></li>
+        </ul>
+    </nav>
+@endsection

@@ -1,0 +1,34 @@
+@layout('layout/app')
+
+@section('content')
+<div class="d-flex justify-content-center mt-5">
+    <form class="row g-3" action="{{ route('raffles.update', {id: raffle.id}) }}" method="post">
+        {{ csrfField() }}
+        
+        <h3 class="text-center text-color-1 mt-5 fs-1">Definir data do sorteio</h3>
+
+        <div class="col-12">
+            @if(flashMessages.has('errors.raffleDate'))
+                <label for="raffleDate" class="form-label text-color-1 fs-4">Data definitiva do sorteio</label>
+                <input type="datetime-local" class="form-control is-invalid" id="raffleDate" name="raffleDate" value="{{flashMessages.get('raffleDate') || ''}}">
+                <div id="ticketPrize" class="text-danger">
+                    {{flashMessages.get('errors.raffleDate')}}
+                </div>
+            @else
+                <label for="raffleDate" class="form-label text-color-1 fs-4">Data definitiva do sorteio</label>
+                <input type="datetime-local" class="form-control" id="raffleDate" name="raffleDate" value="{{flashMessages.get('raffleDate') || ''}}">
+                <div id="ticketPrize" class="form-text text-color-2">
+                    Este campo é obrigatório
+                </div>
+            @endif
+        </div>
+        
+        <div class="col-12">
+            <div class="d-flex justify-content-end">
+                <button type="submit" class="btn btn-lg btn-color-1">Finalizar</button>
+            </div>
+        </div>
+
+      </form>
+</div>
+@endsection

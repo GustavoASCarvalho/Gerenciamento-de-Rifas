@@ -1,0 +1,49 @@
+{
+  "name": "rifas",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "node ace build --production",
+    "start": "node server.js",
+    "dev": "node ace serve --watch",
+    "lint": "eslint . --ext=.ts",
+    "format": "prettier --write ."
+  },
+  "devDependencies": {
+    "@adonisjs/assembler": "^5.1.1",
+    "@symfony/webpack-encore": "^1.2.0",
+    "adonis-preset-ts": "^2.1.0",
+    "eslint": "^7.26.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-adonis": "^1.3.1",
+    "eslint-plugin-prettier": "^3.4.0",
+    "pino-pretty": "^4.8.0",
+    "prettier": "^2.3.0",
+    "sass": "^1.32.12",
+    "sass-loader": "^11.0.0",
+    "typescript": "^4.2.4",
+    "youch": "^2.2.2",
+    "youch-terminal": "^1.1.1"
+  },
+  "dependencies": {
+    "@adonisjs/auth": "^8.0.3",
+    "@adonisjs/core": "^5.1.6",
+    "@adonisjs/lucid": "^14.0.2",
+    "@adonisjs/repl": "^3.1.2",
+    "@adonisjs/session": "^6.0.3",
+    "@adonisjs/shield": "^7.0.2",
+    "@adonisjs/view": "^6.0.1",
+    "@popperjs/core": "^2.9.2",
+    "bootstrap": "^5.0.0",
+    "bootstrap-icons": "^1.5.0",
+    "luxon": "^1.26.0",
+    "pg": "^8.6.0",
+    "phc-argon2": "^1.1.1",
+    "phc-bcrypt": "^1.0.7",
+    "proxy-addr": "^2.0.6",
+    "reflect-metadata": "^0.1.13",
+    "source-map-support": "^0.5.19",
+    "sqlite3": "^5.0.2",
+    "url-parse": "^1.5.1"
+  }
+}

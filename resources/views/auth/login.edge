@@ -1,0 +1,64 @@
+@layout('layout/app')
+
+@section('content')
+
+  	<div class="d-flex justify-content-center mt-5">
+		<div class="shadow-lg rounded-3 bg-body p-3">
+			<main class="form-signin">
+				<form action="{{ route('auth.verify') }}" method="post">
+					{{ csrfField() }}
+					<h2 class="h3 mb-3 fw-normal">Login</h2>
+
+					@if(flashMessages.has('auth.errors') && !flashMessages.has('errors'))
+					<h5 class="text-center text-danger fs-6">Email ou senha invalidos</h5>
+						
+					@endif
+
+					@if(flashMessages.has('errors.email'))
+						<div class="form-floating my-3">
+							<input type="email" class="form-control is-invalid" name="email" id="email" placeholder="nome@exemplo.com" autofocus value="{{flashMessages.get('email') || ''}}">
+							<label for="email">Email</label>
+							<div id="title" class="invalid-feedback">
+								{{flashMessages.get('errors.email')}}
+							</div>
+						</div>
+					@else
+						<div class="form-floating my-3">
+							<input type="email" class="form-control" name="email" id="email" placeholder="nome@exemplo.com" autofocus value="{{flashMessages.get('email') || ''}}">
+							<label for="email">Email</label>
+							<div id="title" class="form-text">
+								Campo obrigatório
+							</div>
+						</div>
+					@endif
+					<div class="form-floating my-3">
+						@if(flashMessages.has('errors.password'))
+							
+							<input type="password" class="form-control is-invalid" name="password" id="password" placeholder="Senha" value="{{flashMessages.get('password') || ''}}">
+							<label for="password">Senha</label>
+							<div id="title" class="invalid-feedback">
+								{{flashMessages.get('errors.password')}}
+							</div>
+							
+						@else
+							
+							<input type="password" class="form-control" name="password" id="password" placeholder="Senha" value="{{flashMessages.get('password') || ''}}">
+							<label for="password">Senha</label>
+							<div id="title" class="form-text">
+								Campo obrigatório
+							</div>
+							
+						@endif
+					</div>
+					<div class="checkbox mb-3">
+						<label>
+							<input class="form-check-input" type="checkbox" name="remember" value="true"> Lembrar de mim
+						</label>
+					</div>
+					<button class="w-100 btn btn-lg btn-color-1" type="submit">Login</button>
+					<span>não tem uma conta ? <a href="{{ route('auth.register') }}">Registre agora</a></span>
+				</form>
+			</main>
+		</div>
+  	</div>
+@endsection

@@ -1,0 +1,60 @@
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+@import '~bootstrap/scss/mixins';
+
+$custom-colors: (
+  'color-1': #2c6880,
+  'color-2': #d4c8c8,
+  'color-3': #141414,
+  'color-4': #202020,
+  'color-5': #338caf,
+);
+
+$font-sizes: (
+  1: $h1-font-size,
+  2: $h2-font-size,
+  3: $h3-font-size,
+  4: $h4-font-size,
+  5: $h5-font-size,
+  6: $h6-font-size,
+  7: 1rem * 3,
+);
+
+$colors: map-merge($colors, $custom-colors);
+$theme-colors: map-merge($theme-colors, $custom-colors);
+
+@import '~bootstrap/scss/bootstrap';
+@import '~bootstrap-icons/font/bootstrap-icons.css';
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+
+img {
+  margin: -20px 0;
+}
+
+.navbar-collapse a:hover {
+  transform: scale(1.05);
+}
+
+html {
+  margin-top: 72px;
+}
+
+.card {
+  min-height: 200px;
+}
+
+@media (min-width: 992px) {
+  .card {
+    min-height: 320px;
+  }
+}
+
+#number {
+  border-left: 1px dashed #fff;
+  writing-mode: vertical-rl;
+}
+
+h3 {
+  font-family: 'Lobster', cursive;
+  font-size: 40px;
+}

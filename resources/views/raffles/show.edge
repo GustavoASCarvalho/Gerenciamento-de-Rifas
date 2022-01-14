@@ -1,0 +1,46 @@
+@layout('layout/app')
+
+@section('content')
+
+    <div class="card my-5 shadow-lg">
+        {{--  {{ inspect(tickets)}}  --}}
+        <div class="card-body text-center">
+            <h5 class="card-title mt-4 fs-2">{{ raffle.title }}</h5>
+            <p class="card-text">{{raffle.description || 'sem descrição'}}</p>
+        </div>
+        <ul class="list-group list-group-flush my-3 text-center">
+            <h5 class="card-title mt-4"> Informações </h5>
+            <li class="list-group-item">Criado por: {{ user.name }}</li>
+            @if(raffle.raffleDate)
+                <li class="list-group-item">Data de realização do sorteio: {{raffle.raffleDate.toLocaleString()}}</li>
+            @else
+                <li class="list-group-item">Data provável do sorteio: {{ raffle.probableRaffleDate.toLocaleString() }}</li>
+            @endif
+            <li class="list-group-item">Inicio das vendas: {{ raffle.initialSaleDate.toLocaleString() }} </li>
+            <li class="list-group-item">Término das vendas: {{ raffle.endSaleDate.toLocaleString() }}</li>
+            <h5 class="card-title mt-4"> Prêmios </h5>
+            @each(prize in prizes)
+                <li class="list-group-item">
+                    @if(prize.winningTicketId)
+                        @each(winner in winners)
+                            @if(winner.prizeId == prize.id)
+                                {{winner.name}} foi o ganhador do
+                            @endif
+                        @endeach
+                    @endif
+                    
+                    {{ prize.placing }}º Prêmio: {{ prize.description }}
+                </li>
+            @endeach
+        </ul>
+        <div class="card-body d-flex justify-content-end">
+            @if(!raffle.raffleDate && raffle.userId == auth.user?.id)
+                <a href="{{ route('raffles.edit', {id: raffle.id} )}}" class="btn btn-success">Finalizar</a>
+            @elseif(raffle.drawn)
+                <a href="{{ route('home.index')}}" class="btn btn-color-4">Voltar</a>
+            @else
+                <a href="{{ route('tickets.show', {id: raffle.id})}}?pag=1" class="btn btn-color-1 text-end">Comprar bilhetes {{ raffle.ticketPrize }} R$</a>
+            @endif
+        </div>
+    </div>
+@endsection
